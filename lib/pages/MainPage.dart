@@ -1,9 +1,28 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_sahibinden_clone/constant/colors.dart';
+import 'package:flutter_sahibinden_clone/entity/Kategoriler.dart';
 
 class MainPage extends StatelessWidget {
+  Future<List<Kategoriler>> kategorileriGetir() async{
+    var kategoriListesi = <Kategoriler>[];
+    var k1 = Kategoriler(kategori_id: 1, kategori_ad: "Emlak", kategori_fotograf: "emlak.png", kategori_icerik: "Konut, İş Yeri, Arsa, Konut Projeleri, Bin...");
+    var k2 = Kategoriler(kategori_id: 2, kategori_ad: "Vasıta", kategori_fotograf: "vasita.png", kategori_icerik: "Otomobil, Arazi, SUV & Pickup, Motosikl...");
+    var k3 = Kategoriler(kategori_id: 3, kategori_ad: "Yedek Parça, Aksesuar, Dona...", kategori_fotograf: "Yedek.png", kategori_icerik: "Otomotiv Ekipmanları, Motosiklet Ekip...");
+    var k4 = Kategoriler(kategori_id: 4, kategori_ad: "İkinci El ve Sıfır Alışveriş", kategori_fotograf: "ikinciel.png", kategori_icerik: "Param Güvende Bilgisayar, Cep Telef...");
+    var k5 = Kategoriler(kategori_id: 5, kategori_ad: "İş Makineleri & Sanayi", kategori_fotograf: "ismakinesi.png", kategori_icerik: "İş Makineleri, Tarım Makineleri, Sanayi...");
+    var k6 = Kategoriler(kategori_id: 6, kategori_ad: "Ustalar ve Hizmetler", kategori_fotograf: "usta.png", kategori_icerik: "Ev Tadilat & Dekorasyon, Nakliye, Araç...");
+    var k7 = Kategoriler(kategori_id: 7, kategori_ad: "Özel Ders Verenler", kategori_fotograf: "ozelders.png", kategori_icerik: "Lise & Üniversite, İlkokul & Ortaokul, Ya...");
+    kategoriListesi.add(k1);
+    kategoriListesi.add(k2);
+    kategoriListesi.add(k3);
+    kategoriListesi.add(k4);
+    kategoriListesi.add(k5);
+    kategoriListesi.add(k6);
+    kategoriListesi.add(k7);
 
+    return kategoriListesi;
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,7 +73,48 @@ class MainPage extends StatelessWidget {
               color: araColor,
             ),
           ),
+          Expanded(
+            child: FutureBuilder<List<Kategoriler>>(
+                future: kategorileriGetir(),
+                builder: (context,snapshot) {
+                  if(snapshot.hasData){
+                    var kategoriList = snapshot.data;
+                    return ListView.builder(
+                        itemCount: kategoriList!.length,
+                        itemBuilder: (context,indeks){
+                          var kategori = kategoriList[indeks];
+                          return Card(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                SizedBox(width: 30,height: 30,child: Image.asset("resimler/${kategori.kategori_fotograf}")),
+                                SizedBox(width: 15,),
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(kategori.kategori_ad),
+                                    Text(kategori.kategori_icerik),
+                                  ],
+                                ),
+                                Spacer(),
+                                IconButton(
+                                    onPressed: (){
 
+                                    },
+                                    icon: Icon(Icons.arrow_forward_ios_outlined,color: Colors.black38,)),
+                              ],
+                            ),
+                          );
+                        }
+                    );
+                  }else {
+                    return Center();
+                  }
+                },
+            ),
+          )
         ],
       ),
       drawer: Drawer(
