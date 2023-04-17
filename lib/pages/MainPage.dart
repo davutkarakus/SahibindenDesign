@@ -83,27 +83,42 @@ class MainPage extends StatelessWidget {
                         itemCount: kategoriList!.length,
                         itemBuilder: (context,indeks){
                           var kategori = kategoriList[indeks];
-                          return Card(
+                          return SizedBox(
+                            height: 70,
                             child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                SizedBox(width: 30,height: 30,child: Image.asset("resimler/${kategori.kategori_fotograf}")),
-                                SizedBox(width: 15,),
+                                SizedBox(width: 40,height: 40,child: Image.asset("resimler/${kategori.kategori_fotograf}")),
                                 Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.center,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(kategori.kategori_ad),
-                                    Text(kategori.kategori_icerik),
+                                    SizedBox(
+                                      width: 350,
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        children: [
+                                          Column(
+                                            mainAxisAlignment: MainAxisAlignment.start,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              Text(kategori.kategori_ad),
+                                              Text(kategori.kategori_icerik),
+                                            ],
+                                          ),
+                                          IconButton(
+                                              onPressed: (){
+
+                                              },
+                                              icon: Icon(Icons.arrow_forward_ios_outlined,color: Colors.black38,)),
+                                        ],
+                                      ),
+                                    ),
+                                    Container(width: 350,height: 0.4,color: Colors.black12,),
                                   ],
                                 ),
-                                Spacer(),
-                                IconButton(
-                                    onPressed: (){
-
-                                    },
-                                    icon: Icon(Icons.arrow_forward_ios_outlined,color: Colors.black38,)),
                               ],
                             ),
                           );
