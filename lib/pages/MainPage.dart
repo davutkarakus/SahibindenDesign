@@ -96,7 +96,10 @@ class MainPage extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  SizedBox(width: 40,height: 40,child: Image.asset("resimler/${kategori.kategori_fotograf}")),
+                                  Padding(
+                                    padding: const EdgeInsets.only(bottom:5.0),
+                                    child: SizedBox(width: 40,height: 40,child: Image.asset("resimler/${kategori.kategori_fotograf}")),
+                                  ),
                                   Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     crossAxisAlignment: CrossAxisAlignment.start,
